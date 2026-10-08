@@ -1,47 +1,443 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --background: #0f172a;
+    --calculator: #111827;
+    --display: #020617;
+    --button: #1e293b;
+    --button-hover: #334155;
+    --operator: #374151;
+    --text: #f8fafc;
+    --secondary: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --danger: #dc2626;
+    --danger-hover: #b91c1c;
+    --border: #334155;
+}
+
+body.light {
+    --background: #e2e8f0;
+    --calculator: #ffffff;
+    --display: #f8fafc;
+    --button: #f1f5f9;
+    --button-hover: #e2e8f0;
+    --operator: #cbd5e1;
+    --text: #0f172a;
+    --secondary: #64748b;
+    --border: #cbd5e1;
+}
+
 body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: #f2f2f2;
-    font-family: Arial, sans-serif;
+
+    padding: 20px;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    transition: 0.3s;
 }
+
+
+/* Calculator */
 
 .calculator {
-    width: 320px;
-    padding: 20px;
-    border-radius: 15px;
-    background: #222;
-}
-
-#display {
     width: 100%;
-    height: 60px;
-    margin-bottom: 15px;
-    font-size: 28px;
-    text-align: right;
-    box-sizing: border-box;
-    padding: 10px;
+    max-width: 650px;
+
+    background: var(--calculator);
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 20px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+
+/* Header */
+
+.header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
 }
 
-button {
-    height: 60px;
-    font-size: 20px;
-    border: none;
+.header h1 {
+    font-size: 22px;
+}
+
+.header p {
+    color: var(--secondary);
+
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+.theme-btn {
+    width: 44px;
+    height: 44px;
+
+    border: 1px solid var(--border);
+
     border-radius: 10px;
+
+    background: var(--button);
+
+    color: var(--text);
+
+    font-size: 18px;
+
     cursor: pointer;
 }
 
-button:hover {
-    opacity: 0.8;
+
+/* Display */
+
+.display-container {
+    background: var(--display);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: 15px;
+
+    margin-bottom: 12px;
 }
 
-.zero {
-    grid-column: span 2;
+.history-display {
+    min-height: 22px;
+
+    text-align: right;
+
+    color: var(--secondary);
+
+    font-size: 14px;
+
+    overflow-wrap: anywhere;
+}
+
+.display {
+    min-height: 60px;
+
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    text-align: right;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    overflow-wrap: anywhere;
+}
+
+.mode-container {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 6px;
+}
+
+.mode {
+    padding: 5px 12px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: var(--button);
+
+    color: var(--secondary);
+
+    cursor: pointer;
+}
+
+.mode.active {
+    background: var(--accent);
+
+    color: white;
+}
+
+.memory-display {
+    color: var(--secondary);
+
+    font-size: 12px;
+
+    text-align: right;
+
+    margin-top: 6px;
+}
+
+
+/* Scientific Buttons */
+
+.scientific-buttons {
+    display: grid;
+
+    grid-template-columns: repeat(6, 1fr);
+
+    gap: 7px;
+
+    margin-bottom: 10px;
+}
+
+.scientific-buttons button {
+    min-height: 42px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    background: var(--button);
+
+    color: var(--text);
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.scientific-buttons button:hover {
+    background: var(--button-hover);
+
+    transform: translateY(-1px);
+}
+
+
+/* Main buttons */
+
+.buttons {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 8px;
+}
+
+.buttons button {
+    min-height: 55px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: var(--button);
+
+    color: var(--text);
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.buttons button:hover {
+    background: var(--button-hover);
+
+    transform: translateY(-1px);
+}
+
+.buttons button:active {
+    transform: scale(0.96);
+}
+
+
+/* Operators */
+
+.buttons .operator {
+    background: var(--operator);
+}
+
+.buttons .equal {
+    background: var(--accent);
+
+    color: white;
+}
+
+.buttons .equal:hover {
+    background: var(--accent-hover);
+}
+
+.buttons .danger {
+    background: var(--danger);
+
+    color: white;
+}
+
+.buttons .danger:hover {
+    background: var(--danger-hover);
+}
+
+
+/* Memory */
+
+.memory-buttons {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 8px;
+
+    margin-top: 8px;
+}
+
+.memory-buttons button {
+    min-height: 42px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    background: var(--button);
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+/* History */
+
+.history-section {
+    margin-top: 18px;
+
+    border-top: 1px solid var(--border);
+
+    padding-top: 14px;
+}
+
+.history-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.history-header h2 {
+    font-size: 15px;
+}
+
+.history-header button {
+    background: transparent;
+
+    border: 1px solid var(--border);
+
+    color: var(--secondary);
+
+    padding: 5px 10px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.history-list {
+    max-height: 180px;
+
+    overflow-y: auto;
+
+    margin-top: 8px;
+}
+
+.history-item {
+    padding: 9px;
+
+    border-bottom: 1px solid var(--border);
+
+    cursor: pointer;
+}
+
+.history-item:hover {
+    background: var(--button);
+}
+
+.history-expression {
+    color: var(--secondary);
+
+    font-size: 12px;
+}
+
+.history-result {
+    text-align: right;
+
+    font-weight: bold;
+
+    font-size: 15px;
+}
+
+.empty-history {
+    color: var(--secondary);
+
+    font-size: 13px;
+
+    padding: 12px 0;
+}
+
+
+/* Responsive */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 8px;
+    }
+
+    .calculator {
+        padding: 12px;
+
+        border-radius: 16px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .display {
+        font-size: 30px;
+    }
+
+    .scientific-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .buttons {
+        gap: 6px;
+    }
+
+    .buttons button {
+        min-height: 50px;
+
+        font-size: 15px;
+    }
 }
